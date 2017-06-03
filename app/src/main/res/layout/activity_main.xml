@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="space.gcy.androidmqtt.MainActivity">
+
+    <LinearLayout
+            android:id="@+id/mqtt_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <EditText
+                android:id="@+id/mqtt_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:hint="服务器地址"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_border"/>
+
+        <EditText
+                android:id="@+id/mqtt_port"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:hint="端口号"
+                android:padding="10dp"
+                android:inputType="number"
+                android:text="1883"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_border"/>
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/mqtt_connect"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_style"
+            android:layout_margin="5dp"
+            android:text="连接"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="#ccc"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送信息"/>
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="#ccc"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <EditText
+                    android:id="@+id/mqtt_send_topic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:hint="发送主题"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/shape_border"/>
+
+            <EditText
+                    android:id="@+id/mqtt_send_mesg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:hint="发送内容"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/shape_border"/>
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/mqtt_button_send"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"
+                android:background="@drawable/button_style"
+                android:layout_margin="5dp"
+                android:text="发送"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="#ccc"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订阅信息"/>
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="#ccc"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <EditText
+                android:id="@+id/mqtt_sub_topic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:hint="订阅主题"
+                android:padding="10dp"
+                android:background="@drawable/shape_border"
+                android:layout_margin="5dp"/>
+
+        <Button
+                android:id="@+id/mqtt_button_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"
+                android:background="@drawable/button_style"
+                android:layout_margin="5dp"
+                android:text="订阅"/>
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/mqtt_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="5dp"
+            android:textSize="10sp"
+            android:background="@drawable/button_style"
+            android:text="清空"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/mqtt_sub_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"/>
+</LinearLayout>
