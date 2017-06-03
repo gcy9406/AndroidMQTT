@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,14 +20,14 @@ import butterknife.ButterKnife;
 
 class Adapter extends RecyclerView.Adapter<Adapter.DataViewHolder> {
     private Context context;
-    private List<String> data = new ArrayList<>();
+    private List<PostInfo> data = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public Adapter(Context context) {
         this.context = context;
     }
 
-    public void setData(List<String> data) {
+    public void setData(List<PostInfo> data) {
         this.data = data;
         notifyDataSetChanged();
     }
@@ -46,15 +44,14 @@ class Adapter extends RecyclerView.Adapter<Adapter.DataViewHolder> {
 
     @Override
     public void onBindViewHolder(final DataViewHolder holder, int position) {
-        holder.itemText.setText(data.get(position));
-        final Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        holder.itemTime.setText("时间:" + sdf.format(date));
+        holder.itemText.setText(data.get(position).getData());
+
+        holder.itemTime.setText("时间:" + data.get(position).getTime());
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = holder.getLayoutPosition();
-                onItemClickListener.doClick(pos,data.get(pos));
+                onItemClickListener.doClick(pos,data.get(pos).getData());
             }
         });
     }

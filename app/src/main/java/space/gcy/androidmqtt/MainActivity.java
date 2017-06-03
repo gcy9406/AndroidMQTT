@@ -26,7 +26,9 @@ import org.fusesource.mqtt.client.QoS;
 import org.fusesource.mqtt.client.Topic;
 
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     public MQTT mqtt;
     public CallbackConnection connection;
     private Adapter adapter;
-    private List<String> result;
+    private List<PostInfo> result;
     private SharedPreferences sp;
     private SharedPreferences.Editor edit;
     private Handler handler = new Handler() {
@@ -81,7 +83,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                     mqttServer.setVisibility(View.GONE);
                     break;
                 case GET_MESSAGE:
-                    result.add((String) msg.obj);
+                    Date date = new Date(System.currentTimeMillis());
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                    result.add(new PostInfo((String) msg.obj,sdf.format(date)));
                     adapter.setData(result);
                     if (result.size() > 0)
                         mqttSubList.smoothScrollToPosition(result.size() - 1);

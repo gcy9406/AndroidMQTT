@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,5 +28,6 @@ public class DialogActivity extends AppCompatActivity {
 
     public void copy(View view) {
         cm.setText(mesg.getText().toString().trim());
+        Toast.makeText(this, "复制成功", Toast.LENGTH_SHORT).show();
     }
 }
