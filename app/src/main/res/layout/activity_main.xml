@@ -1,190 +1,495 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="space.gcy.androidmqtt.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        style="@style/ToolbarStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="space.gcy.androidmqtt.MainActivity">
+        android:layout_height="wrap_content"
+        android:background="#299559"
+        app:navigationIcon="@mipmap/ic_launcher">
 
-    <LinearLayout
-            android:id="@+id/mqtt_server"
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-        <EditText
-                android:id="@+id/mqtt_address"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:hint="服务器地址"
-                android:padding="10dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/shape_border"/>
-
-        <EditText
-                android:id="@+id/mqtt_port"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:hint="端口号"
-                android:padding="10dp"
-                android:inputType="number"
-                android:text="1883"
-                android:layout_margin="5dp"
-                android:background="@drawable/shape_border"/>
-    </LinearLayout>
-
-    <Button
-            android:id="@+id/mqtt_connect"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_style"
-            android:layout_margin="5dp"
-            android:text="连接"/>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="horizontal">
-
-        <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:background="#ccc"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="发送信息"/>
-
-        <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:background="#ccc"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical">
 
-            <EditText
-                    android:id="@+id/mqtt_send_topic"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:hint="发送主题"
-                    android:padding="10dp"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/shape_border"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal">
 
-            <EditText
-                    android:id="@+id/mqtt_send_mesg"
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#ccc" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发布" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="20"
+                        android:background="#ccc" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:hint="发送内容"
-                    android:padding="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/mqtt_send_topic_auto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/shape_border"
+                            android:hint="发送主题"
+                            android:padding="10dp"
+                            android:singleLine="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/mqtt_send_mesg_auto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/shape_border"
+                            android:hint="发送内容"
+                            android:padding="10dp"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/mqtt_button_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="发送"
+                        android:textSize="12sp"
+                        android:textColor="#000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#ccc" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="订阅" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="20"
+                        android:background="#ccc" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/mqtt_sub_topic_auto"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_border"
+                        android:hint="订阅主题"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/mqtt_button_sub"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:textSize="12sp"
+                        android:background="@drawable/button_style"
+                        android:text="订阅"
+                        android:textColor="#000" />
+
+                    <Button
+                        android:id="@+id/mqtt_button_sub_list"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:textSize="12sp"
+                        android:background="@drawable/button_style"
+                        android:text="已订阅"
+                        android:textColor="#000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/get_from_cm"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/select_tag_style"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="剪切板"
+                        android:textColor="#fff"
+                        android:textSize="8sp" />
+
+                    <Button
+                        android:id="@+id/get_from_ctr"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/select_tag_style"
+                        android:drawableRight="@mipmap/icon_pencil"
+                        android:ellipsize="end"
+                        android:paddingRight="10dp"
+                        android:singleLine="true"
+                        android:text="ctr"
+                        android:textColor="#fff"
+                        android:textSize="8sp" />
+
+                    <Button
+                        android:id="@+id/get_from_recv"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/select_tag_style"
+                        android:drawableRight="@mipmap/icon_pencil"
+                        android:ellipsize="end"
+                        android:paddingRight="10dp"
+                        android:singleLine="true"
+                        android:text="state"
+                        android:textColor="#fff"
+                        android:textSize="8sp" />
+
+                    <Button
+                        android:id="@+id/get_from_state"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/select_tag_style"
+                        android:drawableRight="@mipmap/icon_pencil"
+                        android:ellipsize="end"
+                        android:paddingRight="10dp"
+                        android:singleLine="true"
+                        android:text="state=?"
+                        android:textColor="#fff"
+                        android:textSize="8sp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mqtt_sub_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/shape_border"/>
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/msg_clear"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="5dp"
+                    android:src="@mipmap/icon_delete" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_detail_bg"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/line_dismiss"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="right"
+                        android:padding="10dp"
+                        android:src="@mipmap/icon_close" />
+
+                    <TextView
+                        android:id="@+id/sub_topic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="这是主题"
+                        android:textColor="#000"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/sub_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/select_text_bg"
+                    android:padding="20dp"
+                    android:textColor="#000" />
+
+                <Button
+                    android:id="@+id/sub_copy"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/select_copy"
+                    android:text="复制"
+                    android:textColor="#fff"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_subs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_detail_bg"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/sub_dismiss"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_alignParentRight="true"
+                        android:padding="10dp"
+                        android:src="@mipmap/icon_close" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="订阅列表"
+                        android:textColor="#000"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sub_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:minHeight="200dp"
+                    android:padding="20dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#fff"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="#299559">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/head"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@mipmap/zm_mqtt" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/head"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="2dp"
+                            android:text="常州贞明电子科技有限公司"
+                            android:textColor="#fff"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="2dp"
+                            android:text="主营:网络继电器、传感器"
+                            android:textColor="#eee"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoLink="phone"
+                            android:padding="2dp"
+                            android:text="联系电话:15061962326"
+                            android:textColor="#eee"
+                            android:textColorLink="#fff"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoLink="web"
+                            android:padding="2dp"
+                            android:text="网址:www.iotzone.cn"
+                            android:textColor="#eee"
+                            android:textColorLink="#fff"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/connect_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="5dp"
+                    android:background="#00f" />
+
+                <TextView
+                    android:id="@+id/text_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="添加链接"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_margin="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="5dp"
+                    android:background="#f00" />
+
+                <TextView
+                    android:id="@+id/text_clear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="清除缓存"
+                    android:textColor="#e00"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
         </LinearLayout>
-
-        <Button
-                android:id="@+id/mqtt_button_send"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textColor="#FFFFFF"
-                android:layout_gravity="center"
-                android:background="@drawable/button_style"
-                android:layout_margin="5dp"
-                android:text="发送"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="horizontal">
-
-        <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:background="#ccc"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="订阅信息"/>
-
-        <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:background="#ccc"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <EditText
-                android:id="@+id/mqtt_sub_topic"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:hint="订阅主题"
-                android:padding="10dp"
-                android:background="@drawable/shape_border"
-                android:layout_margin="5dp"/>
-
-        <Button
-                android:id="@+id/mqtt_button_sub"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textColor="#FFFFFF"
-                android:layout_gravity="center"
-                android:background="@drawable/button_style"
-                android:layout_margin="5dp"
-                android:text="订阅"/>
-    </LinearLayout>
-
-    <Button
-            android:id="@+id/mqtt_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:textColor="#FFFFFF"
-            android:layout_marginLeft="5dp"
-            android:textSize="10sp"
-            android:background="@drawable/button_style"
-            android:text="清空"/>
-
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/mqtt_sub_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>
+
+

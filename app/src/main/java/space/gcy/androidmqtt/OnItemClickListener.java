@@ -5,5 +5,5 @@ package space.gcy.androidmqtt;
  */
 
 public interface OnItemClickListener {
-    void doClick(int pos,String data);
+    void doClick(int pos,PostInfo data);
 }

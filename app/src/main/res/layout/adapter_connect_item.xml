@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="5dp"
+    android:orientation="horizontal">
+    <View
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_margin="5dp"
+        android:background="#0f0"/>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="#000"/>
+    <ImageView
+        android:id="@+id/connect"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="5dp"
+        android:src="@mipmap/icon_connect"/>
+</LinearLayout>

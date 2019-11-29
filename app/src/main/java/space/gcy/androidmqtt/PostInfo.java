@@ -5,13 +5,15 @@ package space.gcy.androidmqtt;
  */
 
 public class PostInfo {
+    private String topic;
     private String data;
     private String time;
 
     public PostInfo() {
     }
 
-    public PostInfo(String data, String time) {
+    public PostInfo(String topic, String data, String time) {
+        this.topic = topic;
         this.data = data;
         this.time = time;
     }
@@ -30,5 +32,13 @@ public class PostInfo {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }

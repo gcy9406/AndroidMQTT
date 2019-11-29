@@ -1,7 +1,7 @@
 package space.gcy.androidmqtt;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +44,14 @@ class Adapter extends RecyclerView.Adapter<Adapter.DataViewHolder> {
 
     @Override
     public void onBindViewHolder(final DataViewHolder holder, int position) {
-        holder.itemText.setText(data.get(position).getData());
+        holder.itemText.setText(data.get(position).getTopic());
 
         holder.itemTime.setText("时间:" + data.get(position).getTime());
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = holder.getLayoutPosition();
-                onItemClickListener.doClick(pos,data.get(pos).getData());
+                onItemClickListener.doClick(pos,data.get(pos));
             }
         });
     }

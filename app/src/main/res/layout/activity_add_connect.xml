@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddConnectActivity">
+    <LinearLayout
+        android:id="@+id/mqtt_server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/mqtt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_border"
+            android:hint="MQTT名称"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="12sp" />
+        <EditText
+            android:id="@+id/mqtt_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_border"
+            android:hint="服务器地址"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/mqtt_port"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_border"
+            android:hint="端口号"
+            android:inputType="number"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/mqtt_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_border"
+            android:hint="用户名"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/mqtt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_border"
+            android:hint="密码"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/mqtt_client_id"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_border"
+                android:hint="client id"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
+            <Button
+                android:id="@+id/mqtt_id_generate"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/button_style"
+                android:text="自动"/>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
