@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -170,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                     mDrawer.closeDrawers();
                     mToolBar.setSubtitle("暂无连接");
                     ConnectBean cb2 = mConnectData.get(mCurrentPosition);
-                    Toast.makeText(MainActivity.this, cb2.getName() + "已断开连接", Toast.LENGTH_SHORT).show();
                     cb2.setConnected(false);
                     mConnectData.set(mCurrentPosition, cb2);
                     mConnectAdapter.setData(mConnectData);
@@ -190,7 +190,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private int mCurrentTopic;
     ArrayAdapter<String> mAutoAdapter;
     private List<String> mAutoData = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -204,12 +203,19 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         mToolBar.setSubtitle("www.iotzone.cn");
         mToolBar.setTitleTextColor(Color.WHITE);
         mToolBar.setSubtitleTextColor(Color.WHITE);
-        //导航按钮点击事件
-        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+
+        mToggle = new ActionBarDrawerToggle(this, mDrawer, mToolBar, 0, 0){
             @Override
-            public void onClick(View v) {
-                if (mConnectData.size() > mCurrentPosition){
-                    if (mConnected){
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                if (mConnected){
+                    mCurrentPosition = sp.getInt("position",0);
+                    if (mConnectData.size() > mCurrentPosition){
                         ConnectBean connectBean = mConnectData.get(mCurrentPosition);
                         connectBean.setConnected(true);
                         mConnectData.set(mCurrentPosition,connectBean);
@@ -218,9 +224,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 }
                 closeKeyboard();
             }
-        });
-
-        mToggle = new ActionBarDrawerToggle(this, mDrawer, mToolBar, 0, 0);
+        };
         mToggle.syncState();
         mDrawer.addDrawerListener(mToggle);
 
@@ -624,6 +628,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     public void doConnect(ConnectBean mqttConnection, int pos) {
         if (!mConnected) {
             mCurrentPosition = pos;
+            edit.putInt("position",pos);
+            edit.commit();
             connect(mqttConnection.getAddress(), mqttConnection.getPort() + "",
                     mqttConnection.getUsername(), mqttConnection.getPassword(), mqttConnection.getClientId());
         }
