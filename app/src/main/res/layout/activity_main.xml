@@ -71,7 +71,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <AutoCompleteTextView
+                        <space.gcy.androidmqtt.DeleteEditText
                             android:id="@+id/mqtt_send_topic_auto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -81,15 +81,18 @@
                             android:padding="10dp"
                             android:singleLine="true"
                             android:textColor="#000"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:drawablePadding="4dp"
+                            android:drawableRight="@mipmap/icon_del_small"/>
 
-                        <AutoCompleteTextView
+                        <space.gcy.androidmqtt.DeleteEditText
                             android:id="@+id/mqtt_send_mesg_auto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:background="@drawable/shape_border"
                             android:hint="发送内容"
+                            android:drawableRight="@mipmap/icon_del_small"
                             android:padding="10dp"
                             android:textColor="#000"
                             android:textSize="12sp" />
@@ -140,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <AutoCompleteTextView
+                    <space.gcy.androidmqtt.DeleteEditText
                         android:id="@+id/mqtt_sub_topic_auto"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -149,6 +152,8 @@
                         android:background="@drawable/shape_border"
                         android:hint="订阅主题"
                         android:padding="10dp"
+                        android:drawablePadding="4dp"
+                        android:drawableRight="@mipmap/icon_del_small"
                         android:singleLine="true"
                         android:textSize="12sp" />
 
@@ -159,6 +164,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:textSize="12sp"
+                        android:drawablePadding="4dp"
                         android:background="@drawable/button_style"
                         android:text="订阅"
                         android:textColor="#000" />

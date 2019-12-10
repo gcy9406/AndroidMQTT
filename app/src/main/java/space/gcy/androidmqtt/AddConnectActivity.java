@@ -1,6 +1,8 @@
 package space.gcy.androidmqtt;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
@@ -70,49 +72,74 @@ public class AddConnectActivity extends AppCompatActivity {
         mMqttClientId.setText(UUID.randomUUID().toString());
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.add,menu);
+//        return true;
+//    }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add,menu);
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (mId != 0){
+            getMenuInflater().inflate(R.menu.modify,menu);
+        }else {
+            getMenuInflater().inflate(R.menu.add,menu);
+        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         closeKeyboard();
-        if (isEmpty(mMqttName)){
-            Toast.makeText(this,"请自定义名称",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (isEmpty(mMqttAddress)){
-            Toast.makeText(this,"地址不能为空",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (isEmpty(mMqttPort)){
-            Toast.makeText(this,"端口号不能为空",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (isEmpty(mMqttClientId)){
-            Toast.makeText(this,"ID不能为空",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        String name = mMqttName.getText().toString();
-        String address = mMqttAddress.getText().toString();
-        int port = Integer.parseInt(mMqttPort.getText().toString());
-        String username = mMqttUser.getText().toString();
-        String password = mMqttPassword.getText().toString();
-        String client = mMqttClientId.getText().toString();
-        if (mId == 0){
-            getDaoInstant().getMqttConnectionDao().insert(new MqttConnection(name,address,port,username,password,client));
-        }else {
-            mConnection.setName(name);
-            mConnection.setAddress(address);
-            mConnection.setUsername(username);
-            mConnection.setPassword(password);
-            mConnection.setClientId(client);
-            getDaoInstant().getMqttConnectionDao().update(mConnection);
-        }
+        if (item.getItemId() == R.id.del){
+            new AlertDialog.Builder(this)
+                    .setIcon(R.mipmap.zm_mqtt)
+                    .setTitle("您确定要删除当前链接吗？")
+                    .setCancelable(false)
+                    .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
+                    .setPositiveButton("删除", (dialog, which) -> {
+                        List<MqttConnection> tempList = getDaoInstant().getMqttConnectionDao().queryBuilder().where(MqttConnectionDao.Properties.Id.eq(mId)).list();
+                        getDaoInstant().getMqttConnectionDao().deleteInTx(tempList);
+                        finish();
+                    })
+                    .create()
+                    .show();
+        }else{
+            if (isEmpty(mMqttName)){
+                Toast.makeText(this,"请自定义名称",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            if (isEmpty(mMqttAddress)){
+                Toast.makeText(this,"地址不能为空",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            if (isEmpty(mMqttPort)){
+                Toast.makeText(this,"端口号不能为空",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            if (isEmpty(mMqttClientId)){
+                Toast.makeText(this,"ID不能为空",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            String name = mMqttName.getText().toString();
+            String address = mMqttAddress.getText().toString();
+            int port = Integer.parseInt(mMqttPort.getText().toString());
+            String username = mMqttUser.getText().toString();
+            String password = mMqttPassword.getText().toString();
+            String client = mMqttClientId.getText().toString();
+            if (mId == 0){
+                getDaoInstant().getMqttConnectionDao().insert(new MqttConnection(name,address,port,username,password,client));
+            }else {
+                mConnection.setName(name);
+                mConnection.setAddress(address);
+                mConnection.setUsername(username);
+                mConnection.setPassword(password);
+                mConnection.setClientId(client);
+                getDaoInstant().getMqttConnectionDao().update(mConnection);
+            }
 
-        finish();
+            finish();
+        }
         return true;
     }
 

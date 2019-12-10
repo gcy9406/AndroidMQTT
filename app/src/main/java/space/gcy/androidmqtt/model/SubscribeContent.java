@@ -38,4 +38,12 @@ public class SubscribeContent {
         this.timestamp = timestamp;
     }
 
+    @Override
+    public String toString() {
+        return "SubscribeContent{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }

@@ -112,11 +112,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     @BindView(R.id.line_subs)
     LinearLayout mLineSubs;
     @BindView(R.id.mqtt_send_topic_auto)
-    AutoCompleteTextView mMqttSendTopicAuto;
+    DeleteEditText mMqttSendTopicAuto;
     @BindView(R.id.mqtt_send_mesg_auto)
-    AutoCompleteTextView mMqttSendMesgAuto;
+    DeleteEditText mMqttSendMesgAuto;
     @BindView(R.id.mqtt_sub_topic_auto)
-    AutoCompleteTextView mMqttSubTopicAuto;
+    DeleteEditText mMqttSubTopicAuto;
     @BindView(R.id.head)
     ImageView mHead;
     @BindView(R.id.text_add)
@@ -244,17 +244,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         mqttButtonSub.setTextColor(Color.GRAY);
 
 
-        List<SubscribeContent> subscribeContents = getDaoInstant().getSubscribeContentDao().queryBuilder().limit(5).orderDesc(SubscribeContentDao.Properties.Timestamp).list();
+        List<SubscribeContent> subscribeContents = getDaoInstant().getSubscribeContentDao().queryBuilder().orderDesc(SubscribeContentDao.Properties.Timestamp).list();
         if (subscribeContents != null) {
             for (int i = 0; i < subscribeContents.size(); i++) {
                 mAutoData.add(subscribeContents.get(i).getName());
             }
         }
+
         mAutoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mAutoData);
         mMqttSendTopicAuto.setAdapter(mAutoAdapter);
         mMqttSendMesgAuto.setAdapter(mAutoAdapter);
         mMqttSubTopicAuto.setAdapter(mAutoAdapter);
+
         initDatas();
+
     }
 
     @Override
@@ -291,6 +294,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @OnLongClick({R.id.get_from_ctr, R.id.get_from_recv, R.id.get_from_state})
     public boolean onViewLongClicked(View view) {
+        clearFocus();
         switch (view.getId()) {
             case R.id.get_from_ctr:
                 showDialog(getFromCtr,"tag1",sp.getString("tag1","ctr"));
@@ -347,6 +351,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             R.id.get_from_state, R.id.get_from_recv,
             R.id.text_add, R.id.sub_dismiss, R.id.mqtt_button_sub_list})
     public void onViewClicked(View view) {
+        clearFocus();
         switch (view.getId()) {
             case R.id.mqtt_button_send:
                 if (!mConnected) {
@@ -429,6 +434,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     public void addContentToDB(String content) {
+        Log.d("@@@", "订阅内容: "+content);
         if (content == null || content.trim().length() == 0) {
             return;
         }
@@ -436,13 +442,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 .queryBuilder()
                 .where(SubscribeContentDao.Properties.Name.eq(content))
                 .list();
-        if (subscribeContents == null || subscribeContents.size() == 0) {
+        if (subscribeContents.size() == 0) {
             SubscribeContent s1 = new SubscribeContent();
             s1.setName(content);
             s1.setTimestamp(System.currentTimeMillis());
             getDaoInstant().getSubscribeContentDao().insert(s1);
-            mAutoData.add(content);
-            mAutoAdapter.notifyDataSetChanged();
         }
     }
 
@@ -622,6 +626,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 currentTag = -1;
                 break;
         }
+        lineDetail.setVisibility(View.GONE);
+        mLineSubs.setVisibility(View.GONE);
     }
 
     @Override
@@ -669,5 +675,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
+    }
+
+    private void clearFocus(){
+        mMqttSubTopicAuto.clearFocus();
+        mMqttSendMesgAuto.clearFocus();
+        mMqttSendTopicAuto.clearFocus();
     }
 }
