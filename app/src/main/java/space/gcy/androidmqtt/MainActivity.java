@@ -284,6 +284,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         getFromRecv.setText(sp.getString("tag2", "state"));
         getFromState.setText(sp.getString("tag3", "state=?"));
 
+        mMqttSendTopicAuto.setText(sp.getString("last_topic",""));
+        mMqttSendMesgAuto.setText(sp.getString("last_msg",""));
+        mMqttSubTopicAuto.setText(sp.getString("last_sub",""));
+
         cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
         mMqttSubTopicAuto.setOnFocusChangeListener(this);
@@ -360,6 +364,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 }
                 publish(mMqttSendTopicAuto.getText().toString().trim(), mMqttSendMesgAuto.getText().toString().trim());
 
+                edit.putString("last_topic",mMqttSendTopicAuto.getText().toString().trim());
+                edit.putString("last_msg",mMqttSendMesgAuto.getText().toString().trim());
+                edit.commit();
+
                 addContentToDB(mMqttSendTopicAuto.getText().toString().trim());
                 addContentToDB(mMqttSendMesgAuto.getText().toString().trim());
                 break;
@@ -372,6 +380,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 if (mMqttSubTopicAuto.getText().toString().trim().length() > 0) {
                     subscription(mMqttSubTopicAuto.getText().toString().trim());
                     addContentToDB(mMqttSubTopicAuto.getText().toString().trim());
+
+                    edit.putString("last_sub",mMqttSubTopicAuto.getText().toString().trim());
+                    edit.commit();
                 }
                 break;
             case R.id.msg_clear:

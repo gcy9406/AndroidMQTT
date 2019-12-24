@@ -131,6 +131,7 @@ public class AddConnectActivity extends AppCompatActivity {
                 getDaoInstant().getMqttConnectionDao().insert(new MqttConnection(name,address,port,username,password,client));
             }else {
                 mConnection.setName(name);
+                mConnection.setPort(port);
                 mConnection.setAddress(address);
                 mConnection.setUsername(username);
                 mConnection.setPassword(password);
