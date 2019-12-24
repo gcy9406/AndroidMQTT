@@ -94,10 +94,10 @@ public class AddConnectActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.del){
             new AlertDialog.Builder(this)
                     .setIcon(R.mipmap.zm_mqtt)
-                    .setTitle("您确定要删除当前链接吗？")
+                    .setTitle(getResources().getString(R.string.delete_connection_tip))
                     .setCancelable(false)
-                    .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
-                    .setPositiveButton("删除", (dialog, which) -> {
+                    .setNegativeButton(getResources().getString(R.string.cancel), (dialog, which) -> dialog.dismiss())
+                    .setPositiveButton(getResources().getString(R.string.delete), (dialog, which) -> {
                         List<MqttConnection> tempList = getDaoInstant().getMqttConnectionDao().queryBuilder().where(MqttConnectionDao.Properties.Id.eq(mId)).list();
                         getDaoInstant().getMqttConnectionDao().deleteInTx(tempList);
                         finish();
@@ -106,19 +106,19 @@ public class AddConnectActivity extends AppCompatActivity {
                     .show();
         }else{
             if (isEmpty(mMqttName)){
-                Toast.makeText(this,"请自定义名称",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.diy_tag_name),Toast.LENGTH_SHORT).show();
                 return true;
             }
             if (isEmpty(mMqttAddress)){
-                Toast.makeText(this,"地址不能为空",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.empty_address),Toast.LENGTH_SHORT).show();
                 return true;
             }
             if (isEmpty(mMqttPort)){
-                Toast.makeText(this,"端口号不能为空",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.empty_port),Toast.LENGTH_SHORT).show();
                 return true;
             }
             if (isEmpty(mMqttClientId)){
-                Toast.makeText(this,"ID不能为空",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.empty_id),Toast.LENGTH_SHORT).show();
                 return true;
             }
             String name = mMqttName.getText().toString();

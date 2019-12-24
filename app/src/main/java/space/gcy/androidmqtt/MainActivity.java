@@ -140,8 +140,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                     mDrawer.closeDrawers();
                     mConnected = true;
                     ConnectBean cb = mConnectData.get(mCurrentPosition);
-                    Toast.makeText(MainActivity.this, cb.getName() + "已成功连接", Toast.LENGTH_SHORT).show();
-                    mToolBar.setSubtitle(cb.getName() + "已连接");
+                    Toast.makeText(MainActivity.this, cb.getName() + getResources().getString(R.string.contend_success), Toast.LENGTH_SHORT).show();
+                    mToolBar.setSubtitle(cb.getName() + getResources().getString(R.string.connected));
                     cb.setConnected(true);
                     mConnectData.set(mCurrentPosition, cb);
                     mConnectAdapter.setData(mConnectData);
@@ -158,18 +158,18 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 case SUBCSRIP_SUCCESS:
                     mSubDatas.add(mMqttSubTopicAuto.getText().toString().trim());
                     mSubAdapter.setData(mSubDatas);
-                    Toast.makeText(MainActivity.this, "订阅成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.sub_success), Toast.LENGTH_SHORT).show();
                     mMqttSubTopicAuto.setText("");
                     break;
                 case UNSUBCSRIP_SUCCESS:
-                    mqttButtonSub.setText("订阅");
+                    mqttButtonSub.setText(getResources().getString(R.string.subscirbe));
                     mSubDatas.remove(mCurrentTopic);
                     mSubAdapter.setData(mSubDatas);
                     break;
                 case DISCONNECT_SUCCESS:
                     mConnected = false;
                     mDrawer.closeDrawers();
-                    mToolBar.setSubtitle("暂无连接");
+                    mToolBar.setSubtitle(getResources().getString(R.string.no_connection));
                     ConnectBean cb2 = mConnectData.get(mCurrentPosition);
                     cb2.setConnected(false);
                     mConnectData.set(mCurrentPosition, cb2);
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         setSupportActionBar(mToolBar);
 
-        mToolBar.setTitle("贞明MQ");
+        mToolBar.setTitle(getResources().getString(R.string.app_name));
         mToolBar.setSubtitle("www.iotzone.cn");
         mToolBar.setTitleTextColor(Color.WHITE);
         mToolBar.setSubtitleTextColor(Color.WHITE);
@@ -320,18 +320,18 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         final EditText content = view.findViewById(R.id.content);
         content.setText(tag);
         content.setSelection(0,tag.length());
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 closeKeyboard();
                 dialogInterface.dismiss();
             }
         });
-        dialog.setPositiveButton("保存", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton(getResources().getString(R.string.save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (content.getText().toString().trim().length() == 0){
-                    Toast.makeText(MainActivity.this, "标签不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.empty_tag), Toast.LENGTH_SHORT).show();
                 }else {
                     closeKeyboard();
                     edit.putString(index,content.getText().toString().trim());
@@ -342,7 +342,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
             }
         });
-        dialog.setTitle("修改快捷标签");
+        dialog.setTitle(getResources().getString(R.string.modify_tag));
         dialog.setCancelable(true);
         dialog.setIcon(R.mipmap.zm_mqtt);
         dialog.create().show();
@@ -359,7 +359,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         switch (view.getId()) {
             case R.id.mqtt_button_send:
                 if (!mConnected) {
-                    Toast.makeText(this, "MQTT未连接", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 publish(mMqttSendTopicAuto.getText().toString().trim(), mMqttSendMesgAuto.getText().toString().trim());
@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 break;
             case R.id.mqtt_button_sub:
                 if (!mConnected) {
-                    Toast.makeText(this, "MQTT未连接", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -401,7 +401,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 break;
             case R.id.sub_copy:
                 cm.setText(currentContent);
-                Toast.makeText(this, "复制成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.copy_success), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.get_from_ctr:
                 setContent(sp.getString("tag1","ctr"));
@@ -418,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 break;
             case R.id.text_clear:
                 getDaoInstant().getSubscribeContentDao().deleteAll();
-                Toast.makeText(this, "缓存已清除", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.cache_clear), Toast.LENGTH_SHORT).show();
                 mDrawer.closeDrawers();
                 break;
             case R.id.mqtt_button_sub_list:
@@ -445,7 +445,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     public void addContentToDB(String content) {
-        Log.d("@@@", "订阅内容: "+content);
         if (content == null || content.trim().length() == 0) {
             return;
         }
@@ -661,7 +660,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     @Override
     public void editConnect(ConnectBean mqttConnection, int pos) {
         if (mConnected){
-            Toast.makeText(this, "请先断开连接，再修改", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.disconnet_tip), Toast.LENGTH_SHORT).show();
         }else {
             startActivity(new Intent(this, AddConnectActivity.class).putExtra("id", mqttConnection.getId()));
         }
@@ -670,7 +669,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     @Override
     public void delSub(String topic, int pos) {
         if (!mConnected) {
-            Toast.makeText(this, "MQTT未连接", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
             return;
         }
         mCurrentTopic = pos;

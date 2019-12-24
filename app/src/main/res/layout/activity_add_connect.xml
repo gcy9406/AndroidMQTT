@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/shape_border"
-            android:hint="MQTT名称"
+            android:hint="@string/mqtt_name"
             android:padding="10dp"
             android:singleLine="true"
             android:textSize="12sp" />
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/shape_border"
-            android:hint="服务器地址"
+            android:hint="@string/server_address"
             android:padding="10dp"
             android:singleLine="true"
             android:textSize="12sp" />
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/shape_border"
-            android:hint="端口号"
+            android:hint="@string/port"
             android:inputType="number"
             android:padding="10dp"
             android:singleLine="true"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/shape_border"
-            android:hint="用户名"
+            android:hint="@string/username"
             android:padding="10dp"
             android:singleLine="true"
             android:textSize="12sp" />
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/shape_border"
-            android:hint="密码"
+            android:hint="@string/password"
             android:padding="10dp"
             android:singleLine="true"
             android:textSize="12sp" />
@@ -88,7 +88,7 @@
                 android:layout_height="36dp"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/button_style"
-                android:text="自动"/>
+                android:text="@string/generated"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

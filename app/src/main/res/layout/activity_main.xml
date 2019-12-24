@@ -50,7 +50,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="发布" />
+                        android:text="@string/publish" />
 
                     <View
                         android:layout_width="0dp"
@@ -77,7 +77,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:background="@drawable/shape_border"
-                            android:hint="发送主题"
+                            android:hint="@string/topic"
                             android:padding="10dp"
                             android:singleLine="true"
                             android:textColor="#000"
@@ -91,7 +91,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:background="@drawable/shape_border"
-                            android:hint="发送内容"
+                            android:hint="@string/content"
                             android:drawableRight="@mipmap/icon_del_small"
                             android:padding="10dp"
                             android:textColor="#000"
@@ -105,7 +105,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:background="@drawable/button_style"
-                        android:text="发送"
+                        android:text="@string/send"
                         android:textSize="12sp"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -128,7 +128,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="订阅" />
+                        android:text="@string/subscirbe" />
 
                     <View
                         android:layout_width="0dp"
@@ -150,7 +150,7 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/shape_border"
-                        android:hint="订阅主题"
+                        android:hint="@string/sub_topic"
                         android:padding="10dp"
                         android:drawablePadding="4dp"
                         android:drawableRight="@mipmap/icon_del_small"
@@ -166,7 +166,7 @@
                         android:textSize="12sp"
                         android:drawablePadding="4dp"
                         android:background="@drawable/button_style"
-                        android:text="订阅"
+                        android:text="@string/subscirbe"
                         android:textColor="#000" />
 
                     <Button
@@ -177,7 +177,7 @@
                         android:layout_margin="5dp"
                         android:textSize="12sp"
                         android:background="@drawable/button_style"
-                        android:text="已订阅"
+                        android:text="@string/subscribes"
                         android:textColor="#000" />
                 </LinearLayout>
 
@@ -198,7 +198,7 @@
                         android:background="@drawable/select_tag_style"
                         android:ellipsize="end"
                         android:singleLine="true"
-                        android:text="剪切板"
+                        android:text="@string/copied"
                         android:textColor="#fff"
                         android:textSize="8sp" />
 
@@ -293,7 +293,6 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="这是主题"
                         android:textColor="#000"
                         android:textStyle="bold" />
                 </RelativeLayout>
@@ -313,7 +312,7 @@
                     android:layout_height="48dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/select_copy"
-                    android:text="复制"
+                    android:text="@string/to_copy"
                     android:textColor="#fff"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -346,7 +345,7 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="订阅列表"
+                        android:text="@string/sub_list"
                         android:textColor="#000"
                         android:textStyle="bold" />
                 </RelativeLayout>
@@ -400,7 +399,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="2dp"
-                            android:text="常州贞明电子科技有限公司"
+                            android:text="@string/company"
                             android:textColor="#fff"
                             android:textSize="12sp" />
 
@@ -408,7 +407,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="2dp"
-                            android:text="主营:网络继电器、传感器"
+                            android:text="@string/products"
                             android:textColor="#eee"
                             android:textSize="10sp" />
 
@@ -417,7 +416,7 @@
                             android:layout_height="wrap_content"
                             android:autoLink="phone"
                             android:padding="2dp"
-                            android:text="联系电话:15061962326"
+                            android:text="@string/telphone"
                             android:textColor="#eee"
                             android:textColorLink="#fff"
                             android:textSize="10sp" />
@@ -427,7 +426,7 @@
                             android:layout_height="wrap_content"
                             android:autoLink="web"
                             android:padding="2dp"
-                            android:text="网址:www.iotzone.cn"
+                            android:text="@string/web_site"
                             android:textColor="#eee"
                             android:textColorLink="#fff"
                             android:textSize="10sp" />
@@ -459,7 +458,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:text="添加链接"
+                    android:text="@string/add_connection"
                     android:textColor="#000"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -489,7 +488,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:text="清除缓存"
+                    android:text="@string/clear_cache"
                     android:textColor="#e00"
                     android:textSize="14sp" />
             </LinearLayout>

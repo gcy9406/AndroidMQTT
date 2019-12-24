@@ -14,7 +14,7 @@
         android:padding="10dp"
         android:singleLine="true"
         android:ellipsize="end"
-        android:hint="输入快捷标签"
+        android:hint="@string/input_tag"
         android:textSize="12sp"
         android:textColor="#000"
         android:background="@drawable/shape_border"/>

@@ -12,7 +12,6 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:textSize="12sp"
-            android:text="测试"
             android:singleLine="true"
             android:ellipsize="end"/>
 
@@ -22,6 +21,5 @@
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:textSize="10sp"
-            android:text="dddd"
             android:singleLine="true"/>
 </LinearLayout>
