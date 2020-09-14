@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ZMMQ</string>
+    <string name="app_name">MQTT Debug</string>
     <string name="mqtt_name">MQTT Name</string>
     <string name="server_address">Broker Address</string>
     <string name="port">Broker Port</string>

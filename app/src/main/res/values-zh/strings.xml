@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">贞明MQ</string>
+    <string name="app_name">MQTT调试工具</string>
     <string name="mqtt_name">MQTT名称</string>
     <string name="server_address">服务器地址</string>
     <string name="port">端口号</string>

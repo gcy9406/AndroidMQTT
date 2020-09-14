@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidMQTT.iml" filepath="$PROJECT_DIR$/AndroidMQTT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidMQTT-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidMQTT-app.iml" group="AndroidMQTT/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidProjects-AndroidMQTT.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidProjects-AndroidMQTT.iml" group="AndroidMQTT" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
